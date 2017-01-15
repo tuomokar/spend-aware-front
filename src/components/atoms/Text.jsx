@@ -4,7 +4,7 @@ import { StyleSheet, css } from 'aphrodite/no-important';
 import Styles from 'constants/Styles.js';
 
 /**
- * A basic text component
+ * A basic text component.
  */
 export default class Text extends React.Component {
 

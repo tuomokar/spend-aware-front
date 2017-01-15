@@ -7,7 +7,7 @@ import Styles from 'constants/Styles';
 import Title from 'components/atoms/Title';
 
 /**
- * A basic text component
+ * Logo of the site.
  */
 export default class Logo extends React.Component {
 

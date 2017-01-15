@@ -5,7 +5,7 @@ import Logo from 'components/atoms/Logo';
 import Styles from 'constants/Styles.js';
 
 /**
- * Handles the header of the page
+ * Handles the header of the page.
  */
 export default class Application extends React.Component {
 

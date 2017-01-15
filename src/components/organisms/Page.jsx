@@ -6,7 +6,7 @@ import Text from 'components/atoms/Text';
 import Title from 'components/atoms/Title';
 
 /**
- * Handles what content is shown on the page
+ * Handles what content is shown on the page.
  */
 export default class Page extends React.Component {
 
