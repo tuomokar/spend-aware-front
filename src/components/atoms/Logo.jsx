@@ -14,7 +14,9 @@ export default class Logo extends React.Component {
     render() {
         return (
             <span className={ css(styles.logoContainer )}>
-                <Image height={ Styles.layout.headerHeight }>
+                <Image
+                    altText='Leaf logo'
+                    height={ Styles.layout.headerHeight }>
                     { LeafImage }
                 </Image>
                 <Title

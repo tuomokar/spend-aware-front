@@ -18,6 +18,7 @@ export default class Image extends React.Component {
     render() {
         return (
             <img
+                alt={ this.props.altText }
                 className={ css(this._styles().image) }
                 src={ this.props.children } />
         );
@@ -27,6 +28,7 @@ export default class Image extends React.Component {
 
 
 Image.propTypes = {
+    altText: React.PropTypes.string,
     children: React.PropTypes.string.isRequired,
     height: React.PropTypes.string.isRequired
 }
