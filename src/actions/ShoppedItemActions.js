@@ -15,11 +15,9 @@ class ShoppedItemActions {
 
     fetchShoppedItems() {
         return dispatch => {
-            // we dispatch an event here so we can have "loading" state.
-            dispatch();
+            dispatch(); // dispatch here to get "loading" state
             ShoppedItemSource.fetch()
                 .then(shoppedItems => {
-                    // we can access other actions within our action through `this.actions`
                     this.updateShoppedItems(shoppedItems);
             })
                 .catch(errorMessage => {

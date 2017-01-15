@@ -5,6 +5,7 @@ import Header from 'components/organisms/Header';
 import Page from 'components/organisms/Page';
 import Styles from 'constants/Styles';
 
+
 /**
  * The root of the application
  */
