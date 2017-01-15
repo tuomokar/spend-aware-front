@@ -31,7 +31,7 @@ export default class Text extends React.Component {
 
 Text.propTypes = {
     fontSize: React.PropTypes.string,
-    color: React.PropTypes.string
+    color: React.PropTypes.string,
     children: React.PropTypes.string.isRequired
 }
 
