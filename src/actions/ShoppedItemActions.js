@@ -1,6 +1,4 @@
 import AltInstance from '../alt';
-import 'whatwg-fetch';
-
 import ShoppedItemSource from 'sources/ShoppedItemSource';
 
 class ShoppedItemActions {
