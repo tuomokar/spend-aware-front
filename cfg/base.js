@@ -14,6 +14,7 @@ module.exports = {
   port: defaultSettings.port,
   debug: true,
   devtool: 'eval',
+  entry: ['whatwg-fetch'],
   output: {
     path: path.join(__dirname, '/../dist/assets'),
     filename: 'app.js',
@@ -32,6 +33,7 @@ module.exports = {
     alias: {
       actions: `${defaultSettings.srcPath}/actions/`,
       components: `${defaultSettings.srcPath}/components/`,
+      sources: `${defaultSettings.srcPath}/sources/`,
       stores: `${defaultSettings.srcPath}/stores/`,
       styles: `${defaultSettings.srcPath}/styles/`,
       constants: `${defaultSettings.srcPath}/constants/`,
