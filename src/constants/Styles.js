@@ -2,7 +2,8 @@
 const Styles = {
     colors: {
         headerColor: '#4e5d6c',
-        siteBackgroundColor: '#2b3e50'
+        siteBackgroundColor: '#2b3e50',
+        textWhiteGray: '#ebebeb'
     },
     layout: {
         headerHeight: '3.125rem',
