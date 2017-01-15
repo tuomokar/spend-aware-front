@@ -8,9 +8,9 @@ import Styles from 'constants/Styles.js';
  */
 export default class Title extends React.Component {
 
-    titleLevel() {
+    _titleLevel() {
         let content = this.props.children;
-        let style = css(this.styles().title);
+        let style = css(this._styles().title);
         return {
             1: <h1 className={ style }>{ content }</h1>,
             2: <h2 className={ style }>{ content }</h2>,
@@ -18,7 +18,7 @@ export default class Title extends React.Component {
         }
     }
 
-    styles() {
+    _styles() {
         return StyleSheet.create({
             title: {
                 color: this.props.color,
@@ -29,7 +29,7 @@ export default class Title extends React.Component {
     }
 
     render() {
-        let component = this.titleLevel()[this.props.level];
+        let component = this._titleLevel()[this.props.level];
         return component;
     }
 }

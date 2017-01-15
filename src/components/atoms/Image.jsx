@@ -7,7 +7,7 @@ import { StyleSheet, css } from 'aphrodite/no-important';
  */
 export default class Image extends React.Component {
 
-    styles() {
+    _styles() {
         return StyleSheet.create({
             image: {
                 height: this.props.height
@@ -18,7 +18,7 @@ export default class Image extends React.Component {
     render() {
         return (
             <img
-                className={ css(this.styles().image) }
+                className={ css(this._styles().image) }
                 src={ this.props.children } />
         );
     }

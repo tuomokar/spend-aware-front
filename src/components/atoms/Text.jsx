@@ -8,7 +8,7 @@ import Styles from 'constants/Styles.js';
  */
 export default class Text extends React.Component {
 
-    styles() {
+    _styles() {
         return StyleSheet.create({
             text: {
                 fontSize: this.props.fontSize,
@@ -18,9 +18,8 @@ export default class Text extends React.Component {
     }
 
     render() {
-        let rootStyles = css(this.styles().text);
         return (
-            <span className={ rootStyles }>
+            <span className={ css(this._styles().text) }>
                 { this.props.children }
             </span>
         );
