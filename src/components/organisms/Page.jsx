@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, css } from 'aphrodite/no-important';
 
+import ItemList from 'components/molecules/ItemList';
 import Styles from 'constants/Styles';
-import Text from 'components/atoms/Text';
 import Title from 'components/atoms/Title';
 
 /**
@@ -15,7 +15,7 @@ export default class Page extends React.Component {
             <div className={ css(styles.content) }>
                 <div className={ css(styles.paddingContainer) }>
                     <Title level={ 1 }>SpendAware</Title>
-                    <Text>Page content will come here</Text>
+                    <ItemList />
                 </div>
             </div>
         );
