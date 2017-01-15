@@ -1,5 +1,5 @@
 
-bower# SpendAware frontend
+# SpendAware frontend
 
 SpendAware is a small application made for Cyber security course of mooc.fi in 2016-2017, organized in collaboration by F-Secure and the department of computer science of University of Helsinki.
 
