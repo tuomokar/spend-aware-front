@@ -1,31 +1,25 @@
 import React from 'react'
 
+import Empty from 'components/atoms/Empty';
 import Item from 'components/atoms/Item';
 
 /**
- * A basic text component.
+ * A component for listing the shopped items.
  */
 export default class ItemList extends React.Component {
 
-    _renderItems(items) {
-        return items.map((item, index) => {
-            return <Item key={ index }>{ item }</Item>;
+    _renderItems(items = []) {
+        if (items.length === 0) {
+            return <Empty />;
+        }
+
+        return items.map(item => {
+            return <Item key={ item.id }>{ item }</Item>;
         });
     }
 
-    _getMockData() {
-        return [
-            {
-                name: 'milk'
-            },
-            {
-                name: 'bread'
-            }
-        ];
-    }
-
     render() {
-        let items = this._renderItems(this._getMockData());
+        let items = this._renderItems(this.props.items);
 
         return (
             <div>
@@ -38,5 +32,7 @@ export default class ItemList extends React.Component {
 
 
 ItemList.propTypes = {
-    children: React.PropTypes.array//.isRequired
+    items: React.PropTypes.arrayOf(React.PropTypes.shape({
+        name: React.PropTypes.string.isRequired
+    })).isRequired
 }
