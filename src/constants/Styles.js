@@ -3,7 +3,8 @@ const Styles = {
     colors: {
         headerColor: '#4e5d6c',
         siteBackgroundColor: '#2b3e50',
-        textWhiteGray: '#ebebeb'
+        textWhiteGray: '#ebebeb',
+        submitButtonOrange: '#df691a'
     },
     layout: {
         headerHeight: '3.125rem',
