@@ -8,7 +8,7 @@ This repository is the frontend for my application. The purpose of this project,
 
 ### Run instructions:
 
-These instructions assume you have npm (Node package manager) and git installed. If you don't, install them first.
+These instructions assume you have Node.js, npm (Node package manager) and git installed. If you don't, install them first. Download links: [Node.js and npm](https://nodejs.org/en/download/) (npm comes with Node.js) and [git](https://git-scm.com/downloads).
 
 1. Clone the repo on your computer
 2. Go to the location of the cloned repo in the terminal application you use
