@@ -12,7 +12,7 @@ class ShoppedItemActions {
     }
 
     fetchShoppedItems() {
-        return dispatch => {
+        return () => {
             ShoppedItemSource.fetch()
                 .then(shoppedItems => {
                     this.updateShoppedItems(shoppedItems);
