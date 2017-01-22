@@ -13,7 +13,6 @@ class ShoppedItemActions {
 
     fetchShoppedItems() {
         return dispatch => {
-            dispatch(); // dispatch here to get "loading" state
             ShoppedItemSource.fetch()
                 .then(shoppedItems => {
                     this.updateShoppedItems(shoppedItems);
