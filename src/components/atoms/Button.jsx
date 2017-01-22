@@ -1,6 +1,6 @@
-import React from 'react'
-import { StyleSheet, css } from 'aphrodite/no-important';
+import React from 'react';
 
+import RaisedButton from 'material-ui/RaisedButton';
 import Styles from 'constants/Styles.js';
 
 /**
@@ -9,24 +9,20 @@ import Styles from 'constants/Styles.js';
 export default class Button extends React.Component {
 
     _styles() {
-        return StyleSheet.create({
-            button: {
-                backgroundColor: this.props.color,
-                color: Styles.colors.textWhiteGray,
-                border: '0',
-                borderRadius: '5%',
-                padding: '10px 20px'
-            }
-        });
+        return {
+            borderRadius: '5%',
+            margin: this.props.margin
+        };
     }
 
     render() {
         return (
-            <input
-                className={ css(this._styles().button) }
+            <RaisedButton
+                backgroundColor={ this.props.color }
+                label={ this.props.value }
+                labelColor={ Styles.colors.textWhiteGray }
                 onClick={ this.props.clickEvent }
-                type='button'
-                value={ this.props.value } />
+                style={ this._styles() }/>
         );
     }
 }
@@ -36,10 +32,14 @@ export default class Button extends React.Component {
 Button.propTypes = {
     clickEvent: React.PropTypes.func.isRequired,
     color: React.PropTypes.string,
+    disabled: React.PropTypes.bool,
+    margin: React.PropTypes.string,
     value: React.PropTypes.string
 }
 
 Button.defaultProps = {
     color: Styles.colors.submitButtonOrange,
+    disabled: false,
+    margin: '4px',
     value: 'Submit'
 }

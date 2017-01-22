@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 import config from 'config';
 
 let apiUrl = `${config.baseApiUrl}items`;
-var ShoppedItemSource = {
+let ShoppedItemSource = {
 
     fetch: function () {
         return new Promise(function(resolve) {
