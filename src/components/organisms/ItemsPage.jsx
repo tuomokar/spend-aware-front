@@ -19,15 +19,15 @@ export default class ItemsPage extends React.Component {
     }
 
     componentDidMount() {
-        ShoppedItemStore.listen(this.onChange.bind(this));
+        ShoppedItemStore.listen(this._onChange.bind(this));
         ShoppedItemActions.fetchShoppedItems();
     }
 
     componentWillUnmount() {
-        ShoppedItemStore.unlisten(this.onChange.bind(this));
+        ShoppedItemStore.unlisten(this._onChange.bind(this));
     }
 
-    onChange(state) {
+    _onChange(state) {
         this.setState(state);
     }
 

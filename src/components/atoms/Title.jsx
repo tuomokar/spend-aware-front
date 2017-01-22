@@ -39,7 +39,7 @@ export default class Title extends React.Component {
 Title.propTypes = {
     children: React.PropTypes.string.isRequired,
     color: React.PropTypes.string,
-    level: React.PropTypes.number.isRequired,
+    level: React.PropTypes.number,
     display: React.PropTypes.string,
     margin: React.PropTypes.string
 }

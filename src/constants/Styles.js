@@ -4,7 +4,8 @@ const Styles = {
         headerColor: '#4e5d6c',
         siteBackgroundColor: '#2b3e50',
         textWhiteGray: '#ebebeb',
-        submitButtonOrange: '#df691a'
+        submitButtonOrange: '#df691a',
+        errorTextOrange: '#FF9203'
     },
     layout: {
         headerHeight: '3.125rem',

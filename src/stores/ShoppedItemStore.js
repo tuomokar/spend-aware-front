@@ -19,7 +19,7 @@ class ShoppedItemStore {
     }
 
     handleFetchShoppedItems() {
-        this.locations = [];
+        this.shoppedItems = [];
     }
 
     handleShoppedItemsFailed(errorMessage) {

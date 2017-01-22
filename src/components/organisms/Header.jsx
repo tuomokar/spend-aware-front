@@ -1,28 +1,54 @@
 import React from 'react'
-import { StyleSheet, css } from 'aphrodite/no-important';
 
-import Logo from 'components/atoms/Logo';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import Styles from 'constants/Styles.js';
+import TokenActions from 'actions/TokenActions';
+
 
 /**
  * Handles the header of the page.
  */
 export default class Application extends React.Component {
 
+    _renderUserMenu() {
+        let iconButtonElement = <IconButton><MoreVertIcon /></IconButton>;
+        return (
+            <IconMenu
+                anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                iconButtonElement={ iconButtonElement }
+                targetOrigin={{horizontal: 'right', vertical: 'top'}}>
+                    <MenuItem primaryText='My Page' />
+                    <MenuItem
+                        onTouchTap={ this._logoutAction }
+                        primaryText='Sign out' />
+            </IconMenu>
+        )
+    }
+
+    _logoutAction() {
+        TokenActions.logout();
+    }
+
+    _styles() {
+        return {
+            backgroundColor: Styles.colors.headerColor,
+            position: 'absolute',
+            width: '100%',
+            height: Styles.layout.headerHeight,
+            display: 'flex',
+            flexDirection: 'row'
+        }
+    }
+
     render() {
         return (
-            <div className={ css(styles.headerContainer) }>
-                <Logo />
-            </div>
+            <AppBar
+                iconElementRight={ this._renderUserMenu() }
+                style={ this._styles() } />
         );
     }
 }
-
-const styles = StyleSheet.create({
-    headerContainer: {
-        backgroundColor: Styles.colors.headerColor,
-        position: 'absolute',
-        width: '100%',
-        height: Styles.layout.headerHeight
-    }
-});

@@ -4,7 +4,7 @@ import Application from './components/Application';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import 'styles/App.css';
 
-let injectTapEventPlugin = require("react-tap-event-plugin");
+import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 const App = () => (
