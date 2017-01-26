@@ -1,5 +1,4 @@
 import React from 'react'
-import { StyleSheet, css } from 'aphrodite/no-important';
 
 import Styles from 'constants/Styles.js';
 
@@ -9,23 +8,26 @@ import Styles from 'constants/Styles.js';
 export default class Text extends React.Component {
 
     _styles() {
-        return StyleSheet.create({
-            text: {
-                fontSize: this.props.fontSize,
-                color: this.props.color
-            }
-        });
+        return {
+            fontSize: this.props.fontSize,
+            color: this.props.color
+        }
     }
 
+    /*
+     * Renders the children as pure html. A cheat to get XSS to work (React
+     * being too smart to prevent it otherwise). See also ItemList component.
+     * DO NOT THIS AT HOME!
+     */
     render() {
         return (
-            <span className={ css(this._styles().text) }>
-                { this.props.children }
-            </span>
+            <span
+                dangerouslySetInnerHTML={ {__html: this.props.children } }
+                style={ this._styles() } />
+
         );
     }
 }
-
 
 
 Text.propTypes = {
