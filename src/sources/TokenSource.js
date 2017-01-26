@@ -8,7 +8,7 @@ let apiUrl = `${config.baseApiUrl}authenticate`;
  */
 let TokenSource = {
 
-    sendAuthenticationInfo: function(userInfo) {
+    sendAuthenticationInfo: (userInfo) => {
         return new Promise(resolve => {
             fetch(apiUrl, {
                 method: 'POST',
@@ -18,7 +18,9 @@ let TokenSource = {
                     password: userInfo.password
                 })
             }).then(res => {
-                resolve(res.json());
+                return res.json();
+            }).then(json => {
+                resolve(json);
             }).catch(exc => {
                 throw `parsing failed ${exc}`;
             });

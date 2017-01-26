@@ -15,6 +15,10 @@ class TextInputActions {
     updateTextInput(inputWithKeyAndValue = {}) {
         return inputWithKeyAndValue;
     }
+
+    resetTextInput(field) {
+        return field;
+    }
 }
 
 export default AltInstance.createActions(TextInputActions);

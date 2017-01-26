@@ -49,10 +49,12 @@ export default class LoginForm extends React.Component {
                 <TextField
                     onChangeAction={ this._usernameFieldInputChange }
                     placeholder='username'
+                    showAsABox
                     underlineShow={ false } />
                 <TextField
                     onChangeAction={ this._passwordFieldInputChange }
                     placeholder='password'
+                    showAsABox
                     underlineShow={ false }  />
                 <Button
                     backgroundColor={ Styles.colors.siteBackgroundColor }

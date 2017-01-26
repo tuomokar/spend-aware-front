@@ -9,12 +9,17 @@ class TextInputStore {
     constructor() {
         this.textInputs = {};
         this.bindListeners({
-            handleUpdateTextInput: TextInputActions.UPDATE_TEXT_INPUT
+            handleUpdateTextInput: TextInputActions.UPDATE_TEXT_INPUT,
+            resetInputField: TextInputActions.RESET_TEXT_INPUT
         });
     }
 
     handleUpdateTextInput(newInput = {}) {
         this.textInputs[newInput.key] = newInput.value;
+    }
+
+    resetInputField(field) {
+        this.textInputs[field] = '';
     }
 
 

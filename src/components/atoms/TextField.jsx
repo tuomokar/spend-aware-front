@@ -1,4 +1,7 @@
-import React from 'react'
+import React from 'react';
+import { merge } from 'lodash';
+
+import Styles from 'constants/Styles';
 import TextField from 'material-ui/TextField';
 
 
@@ -7,31 +10,56 @@ import TextField from 'material-ui/TextField';
  */
 export default class TextFieldElement extends React.Component {
 
-    _styles() {
+    _boxStyles() {
         return {
             root: {
-                width: this.props.width,
-                backgroundColor: 'white',
-                margin: this.props.margin,
-                height: '100%',
-                fontSize: '0.75rem'
+                backgroundColor: Styles.colors.white,
+                height: '100%'
             },
             placeholder: {
-                bottom: '-0px',
-                fontSize: '16px',
-                fontSize: '0.75rem'
+                bottom: '0px'
+            },
+            input: {
+                color: Styles.colors.textFieldAlmostBlack
             }
         }
     }
 
+    _styles() {
+        let defaultStyles = {
+            root: {
+                width: this.props.width,
+                margin: this.props.margin,
+                fontSize: '0.75rem'
+            },
+            placeholder: {
+                fontSize: '0.75rem',
+                color: 'grey'
+            },
+            input: {
+                color: Styles.colors.white
+            }
+        };
+
+        let styles = defaultStyles;
+        if (this.props.showAsABox) {
+            styles = merge(styles, this._boxStyles());
+        }
+        return styles;
+    }
+
     render() {
+        let styles = this._styles();
+
         return (
             <TextField
-                hintStyle={ this._styles().placeholder }
+                hintStyle={ styles.placeholder }
                 hintText={ this.props.placeholder }
+                inputStyle={ styles.input }
                 onChange={ this.props.onChangeAction }
-                style={ this._styles().root }
-                underlineShow={ this.props.underlineShow }/>
+                style={ styles.root }
+                underlineShow={ this.props.underlineShow }
+                value={ this.props.value } />
         );
     }
 }
@@ -41,6 +69,7 @@ TextFieldElement.propTypes = {
     margin: React.PropTypes.string,
     onChangeAction: React.PropTypes.func.isRequired,
     placeholder: React.PropTypes.string,
+    showAsABox: React.PropTypes.bool,
     underlineShow: React.PropTypes.bool,
     width: React.PropTypes.string
 }

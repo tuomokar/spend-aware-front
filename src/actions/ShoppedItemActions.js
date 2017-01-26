@@ -1,10 +1,22 @@
 import AltInstance from '../alt';
 import ShoppedItemSource from 'sources/ShoppedItemSource';
+import TextInputActions from 'actions/TextInputActions';
 
 class ShoppedItemActions {
 
     createShoppedItem(shoppedItem) {
-        return shoppedItem;
+        return () => {
+            ShoppedItemSource.create(shoppedItem)
+                .then(() => {
+                    TextInputActions.resetTextInput('newItemName');
+                })
+                .then(() => {
+                    this.fetchShoppedItems();
+                })
+                .catch(error => {
+                    this.shoppedItemsFailed(error);
+                });
+        };
     }
 
     updateShoppedItems(shoppedItems) {
@@ -16,10 +28,10 @@ class ShoppedItemActions {
             ShoppedItemSource.fetch()
                 .then(shoppedItems => {
                     this.updateShoppedItems(shoppedItems);
-            })
+                })
                 .catch(errorMessage => {
                     this.shoppedItemsFailed(errorMessage);
-            });
+                });
         }
     }
 
