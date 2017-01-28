@@ -22,7 +22,7 @@ export default class TextFieldElement extends React.Component {
             input: {
                 color: Styles.colors.textFieldAlmostBlack
             }
-        }
+        };
     }
 
     _styles() {
@@ -37,7 +37,7 @@ export default class TextFieldElement extends React.Component {
                 color: 'grey'
             },
             input: {
-                color: Styles.colors.white
+                color: this.props.textColor
             }
         };
 
@@ -70,12 +70,14 @@ TextFieldElement.propTypes = {
     onChangeAction: React.PropTypes.func.isRequired,
     placeholder: React.PropTypes.string,
     showAsABox: React.PropTypes.bool,
+    textColor: React.PropTypes.string,
     underlineShow: React.PropTypes.bool,
     width: React.PropTypes.string
 }
 
 TextFieldElement.defaultProps = {
     margin: '4px',
+    textColor: Styles.colors.white,
     underlineShow: true,
     width: '5rem'
 }

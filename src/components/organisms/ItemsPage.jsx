@@ -2,12 +2,16 @@ import React from 'react'
 
 import Empty from 'components/atoms/Empty';
 import Button from 'components/atoms/Button';
+import Dialog from 'components/molecules/Dialog';
+import DialogActions from 'actions/DialogActions';
+import DialogStateStore from 'stores/DialogStateStore';
+import ItemCreationForm from 'components/molecules/ItemCreationForm';
 import ItemList from 'components/molecules/ItemList';
 import ShoppedItemStore from 'stores/ShoppedItemStore';
 import ShoppedItemActions from 'actions/ShoppedItemActions';
-import TextField from 'components/atoms/TextField';
 import TextInputActions from 'actions/TextInputActions';
 import TextInputStore from 'stores/TextInputStore';
+import UserStore from 'stores/UserStore';
 
 
 /**
@@ -23,12 +27,16 @@ export default class ItemsPage extends React.Component {
     componentDidMount() {
         ShoppedItemStore.listen(this._onChange.bind(this));
         TextInputStore.listen(this._onChange.bind(this));
+        DialogStateStore.listen(this._onChange.bind(this));
+
         ShoppedItemActions.fetchShoppedItems();
+        DialogActions.setDialogState('itemCreation', false);
     }
 
     componentWillUnmount() {
         ShoppedItemStore.unlisten(this._onChange.bind(this));
         TextInputStore.unlisten(this._onChange.bind(this));
+        DialogStateStore.unlisten(this._onChange.bind(this));
     }
 
     _onChange(state) {
@@ -40,13 +48,17 @@ export default class ItemsPage extends React.Component {
     }
 
     _addItem() {
-        let name = TextInputStore.getState().textInputs.newItemName;
-        if (name === undefined || name.trim() === '') {
+        let inputs = TextInputStore.getState().textInputs;
+        let name = inputs.newItemName;
+        let cost = inputs.newItemCost;
+        if (!name || name.trim() === '' || !cost) {
             return;
         }
+        let userId = UserStore.getState().userInfo.userId;
         ShoppedItemActions.createShoppedItem({
-             name: name
-        });
+             name: name,
+             cost: cost
+        }, userId);
     }
 
     _styles() {
@@ -63,6 +75,36 @@ export default class ItemsPage extends React.Component {
         });
     }
 
+    _closeDialog() {
+        DialogActions.setDialogState({
+            name: 'itemCreation',
+            open: false
+        });
+    }
+
+    _openDialog() {
+        DialogActions.setDialogState({
+            name: 'itemCreation',
+            open: true
+        });
+    }
+
+    _renderDialog() {
+        if (!this.state.dialogs || !this.state.dialogs['itemCreation'] || this.state.dialogs['itemCreation'] === false) {
+            return;
+        }
+
+        return (
+            <Dialog
+                closeAction={ this._closeDialog }
+                open={ this.state.dialogs ? this.state.dialogs['itemCreation'] : false }
+                submitAction={ this._addItem }
+                title='Post new item'>
+                <ItemCreationForm />
+            </Dialog>
+        );
+    }
+
     render() {
         let items = this.state.shoppedItems;
         if (this._noItems(items)) {
@@ -72,17 +114,12 @@ export default class ItemsPage extends React.Component {
         return (
             <div style={ this._styles() }>
                 <div>
-                    <TextField
-                        onChangeAction={ this._newShoppedItemNameInput }
-                        value={ TextInputStore.getState().textInputs.newItemName }
-                        placeholder='Add info on newly shopped item'
-                        width='20rem' />
                     <Button
-                        clickEvent={ this._addItem }
+                        clickEvent={ this._openDialog }
                         value='Add new' />
                 </div>
                 <ItemList items={ items }/>
-
+                { this._renderDialog() }
             </div>
         );
     }

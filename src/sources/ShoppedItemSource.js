@@ -17,13 +17,16 @@ let ShoppedItemSource = {
         });
     },
 
-    create: (item) => {
+    create: (item, userId) => {
         return new Promise(resolve => {
             fetch(apiUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    name: item.name
+                    item: item,
+                    user: {
+                        id: userId
+                    }
                 })
             })
             .then(res => {
