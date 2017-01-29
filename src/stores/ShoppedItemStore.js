@@ -6,11 +6,13 @@ class ShoppedItemStore {
     constructor() {
         this.shoppedItems = [];
         this.errorMessage = null;
+        this.chosenItem = null;
 
         this.bindListeners({
             handleUpdateShoppedItems: ShoppedItemActions.UPDATE_SHOPPED_ITEMS,
             handleFetchShoppedItems: ShoppedItemActions.FETCH_SHOPPED_ITEMS,
-            handleShoppedItemsFailed: ShoppedItemActions.SHOPPED_ITEMS_FAILED
+            handleShoppedItemsFailed: ShoppedItemActions.SHOPPED_ITEMS_FAILED,
+            handleCollectiveInfoOnItem: ShoppedItemActions.SET_COLLECTIVE_INFO_ON_ITEM
         });
     }
 
@@ -24,6 +26,10 @@ class ShoppedItemStore {
 
     handleShoppedItemsFailed(errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    handleCollectiveInfoOnItem(chosenItem) {
+        this.chosenItem = chosenItem;
     }
 }
 

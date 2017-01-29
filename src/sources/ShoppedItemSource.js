@@ -2,6 +2,10 @@ import 'whatwg-fetch';
 import config from 'config';
 
 let apiUrl = `${config.baseApiUrl}items`;
+
+/*
+ * API for /items
+ */
 let ShoppedItemSource = {
 
     fetch: () => {
@@ -16,6 +20,7 @@ let ShoppedItemSource = {
                 })
         });
     },
+
 
     create: (item, userId) => {
         return new Promise(resolve => {

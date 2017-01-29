@@ -10,7 +10,8 @@ export default class Text extends React.Component {
     _styles() {
         return {
             fontSize: this.props.fontSize,
-            color: this.props.color
+            color: this.props.color,
+            display: this.props.display
         }
     }
 
@@ -24,19 +25,19 @@ export default class Text extends React.Component {
             <span
                 dangerouslySetInnerHTML={ {__html: this.props.children } }
                 style={ this._styles() } />
-
         );
     }
 }
 
 
 Text.propTypes = {
-    fontSize: React.PropTypes.string,
     color: React.PropTypes.string,
-    children: React.PropTypes.string.isRequired
+    children: React.PropTypes.string.isRequired,
+    fontSize: React.PropTypes.string,
+    display: React.PropTypes.string
 }
 
 Text.defaultProps = {
-    fontSize: '1.14rem',
-    color: Styles.colors.textWhiteGray
+    color: Styles.colors.textWhiteGray,
+    fontSize: '1.14rem'
 }

@@ -29,8 +29,13 @@ export default class ItemsPage extends React.Component {
         TextInputStore.listen(this._onChange.bind(this));
         DialogStateStore.listen(this._onChange.bind(this));
 
-        ShoppedItemActions.fetchShoppedItems();
+        this._fetchItemsOfUser();
         DialogActions.setDialogState('itemCreation', false);
+    }
+
+    _fetchItemsOfUser() {
+        let userId = UserStore.getState().userInfo.userId;
+        ShoppedItemActions.fetchShoppedItems(userId);
     }
 
     componentWillUnmount() {
@@ -90,14 +95,14 @@ export default class ItemsPage extends React.Component {
     }
 
     _renderDialog() {
-        if (!this.state.dialogs || !this.state.dialogs['itemCreation'] || this.state.dialogs['itemCreation'] === false) {
+        if (!this.state.dialogs || !this.state.dialogs['itemCreation']) {
             return;
         }
 
         return (
             <Dialog
                 closeAction={ this._closeDialog }
-                open={ this.state.dialogs ? this.state.dialogs['itemCreation'] : false }
+                open={ this.state.dialogs['itemCreation'] }
                 submitAction={ this._addItem }
                 title='Post new item'>
                 <ItemCreationForm />

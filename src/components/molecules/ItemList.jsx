@@ -1,8 +1,9 @@
 import React from 'react'
 
 import Empty from 'components/atoms/Empty';
-import Item from 'components/atoms/Item';
+import ItemRow from 'components/molecules/ItemRow';
 import Title from 'components/atoms/Title';
+import ShoppedItemStore from 'stores/ShoppedItemStore';
 
 
 /**
@@ -10,15 +11,42 @@ import Title from 'components/atoms/Title';
  */
 export default class ItemList extends React.Component {
 
+    constructor() {
+        super();
+        this.state = ShoppedItemStore.getState();
+    }
+
+    componentWillUnmount() {
+        ShoppedItemStore.unlisten(this._onChange.bind(this));
+    }
+
+    _onChange(state) {
+        this.setState(state);
+    }
+
     _renderItems(items = []) {
         if (items.length === 0) {
             return <Empty />;
         }
 
+        let chosenItem = this.state.chosenItem;
         return (
-             items.map(item => <Item key={ item.id }>{ item }</Item>)
-        );
+            items.map(item => {
+                let open = false;
+                if (chosenItem && chosenItem.name === item.name) {
+                    open = true;
+                    item = chosenItem;
+                }
 
+                return (
+                    <ItemRow
+                        isOpen={ open }
+                        key={ item.name }>
+                        { item }
+                    </ItemRow>
+                );
+            })
+        );
     }
 
     _runScripts(scripts = []) {
@@ -33,6 +61,8 @@ export default class ItemList extends React.Component {
      * DO NOT THIS AT HOME!
      */
     componentDidMount() {
+        ShoppedItemStore.listen(this._onChange.bind(this));
+
         let itemsDiv = document.getElementById('items-render');
         let scripts = itemsDiv.getElementsByTagName('script');
         this._runScripts(scripts);

@@ -2,6 +2,7 @@ import AltInstance from '../alt';
 import DialogActions from 'actions/DialogActions';
 import ShoppedItemSource from 'sources/ShoppedItemSource';
 import TextInputActions from 'actions/TextInputActions';
+import UserSource from 'sources/UserSource';
 
 class ShoppedItemActions {
 
@@ -18,7 +19,10 @@ class ShoppedItemActions {
                     });
                 })
                 .then(() => {
-                    this.fetchShoppedItems();
+                    this.setCollectiveInfoOnItem(null);
+                })
+                .then(() => {
+                    this.fetchShoppedItems(userId);
                 })
                 .catch(error => {
                     this.shoppedItemsFailed(error);
@@ -30,9 +34,9 @@ class ShoppedItemActions {
         return shoppedItems;
     }
 
-    fetchShoppedItems() {
+    fetchShoppedItems(userId) {
         return () => {
-            ShoppedItemSource.fetch()
+            UserSource.fetchItemsOfUser(userId)
                 .then(shoppedItems => {
                     this.updateShoppedItems(shoppedItems);
                 })
@@ -40,6 +44,22 @@ class ShoppedItemActions {
                     this.shoppedItemsFailed(errorMessage);
                 });
         }
+    }
+
+    fetchCollectiveInfoOnItem(userId, itemName) {
+        return () => {
+            UserSource.fetchCollectiveInfoOnItem(userId, itemName)
+                .then(item => {
+                    this.setCollectiveInfoOnItem(item);
+                })
+                .catch(errorMessage => {
+                    this.shoppedItemsFailed(errorMessage);
+                });
+        }
+    }
+
+    setCollectiveInfoOnItem(item) {
+        return item;
     }
 
     shoppedItemsFailed(errorMessage) {

@@ -45,6 +45,5 @@ DialogOverlay.propTypes = {
     submitAction: React.PropTypes.func.isRequired,
     closeAction: React.PropTypes.func.isRequired,
     open: React.PropTypes.bool.isRequired,
-    title: React.PropTypes.string.isRequired,
-    visible: React.PropTypes.bool
+    title: React.PropTypes.string.isRequired
 }

@@ -8,7 +8,8 @@ const Styles = {
         submitButtonOrange: '#df691a',
         errorTextOrange: '#FF9203',
         white: 'white',
-        textFieldAlmostBlack: 'rgba(0, 0, 0, 0.87)'
+        textFieldAlmostBlack: 'rgba(0, 0, 0, 0.87)',
+        hoverRowSlightlyDarkerBlue: '#263644'
     },
     layout: {
         headerHeight: '3.125rem',
