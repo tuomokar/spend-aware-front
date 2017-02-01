@@ -6,7 +6,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import Styles from 'constants/Styles.js';
-import TokenActions from 'actions/TokenActions';
+import UserActions from 'actions/UserActions';
 
 
 /**
@@ -26,11 +26,11 @@ export default class Application extends React.Component {
                         onTouchTap={ this._logoutAction }
                         primaryText='Sign out' />
             </IconMenu>
-        )
+        );
     }
 
     _logoutAction() {
-        TokenActions.logout();
+        UserActions.logout();
     }
 
     _styles() {

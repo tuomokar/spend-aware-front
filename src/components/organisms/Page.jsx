@@ -3,6 +3,9 @@ import React from 'react'
 import ItemsPage from 'components/organisms/ItemsPage';
 import LoginPage from 'components/organisms/LoginPage';
 import Logo from 'components/atoms/Logo';
+import PageActions from 'actions/PageActions';
+import PageStore from 'stores/PageStore';
+import RegistrationPage from 'components/organisms/RegistrationPage';
 import Styles from 'constants/Styles';
 
 
@@ -11,11 +14,48 @@ import Styles from 'constants/Styles';
  */
 export default class Page extends React.Component {
 
+    constructor() {
+        super();
+        this.state = PageStore.getState();
+        this.mounted = false;
+    }
+
+    componentDidMount() {
+        PageStore.listen(this._onChange.bind(this));
+        this.mounted = true;
+    }
+
+    componentWillUnmount() {
+        PageStore.unlisten(this._onChange.bind(this));
+        this.mounted = false;
+    }
+
+    /*
+     * Some flaw here that results in the page state getting changed more than
+     * it should, and every now and then for some reason it thinks it's not
+     * mounted.
+     */
+    _onChange(state) {
+        if (!this.mounted) {
+            return;
+        }
+        this.setState(state);
+    }
+
     _pageComponent() {
         return {
-            items: <ItemsPage userStoreInfo={ this.props.userStoreInfo } />,
-            login: <LoginPage userStoreInfo={ this.props.userStoreInfo } />
+            items: <ItemsPage />,
+            login: <LoginPage setPage={ this._toRegisterPage } />,
+            register: <RegistrationPage setPage={ this._toLoginPage } />
         };
+    }
+
+    _toRegisterPage() {
+        PageActions.setPage('register');
+    }
+
+    _toLoginPage() {
+        PageActions.setPage('login');
     }
 
     _styles() {
@@ -36,7 +76,7 @@ export default class Page extends React.Component {
     }
 
     render() {
-        let page = this._pageComponent()[this.props.page];
+        let page = this._pageComponent()[this.state.page];
 
         return (
             <div style={ this._styles().content }>
@@ -50,11 +90,9 @@ export default class Page extends React.Component {
 }
 
 Page.propTypes = {
-    page: React.PropTypes.string,
-    userStoreInfo: React.PropTypes.object
+    page: React.PropTypes.string
 }
 
 React.defaultPropTypes = {
-    page: 'items',
-    userStoreInfo: {}
+    page: 'items'
 }

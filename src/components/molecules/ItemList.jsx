@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Empty from 'components/atoms/Empty';
 import ItemRow from 'components/molecules/ItemRow';
+import Text from 'components/atoms/Text';
 import Title from 'components/atoms/Title';
 import ShoppedItemStore from 'stores/ShoppedItemStore';
 
@@ -25,8 +25,8 @@ export default class ItemList extends React.Component {
     }
 
     _renderItems(items = []) {
-        if (items.length === 0) {
-            return <Empty />;
+        if (!items || items.length === 0) {
+            return <Text>No items for you at the moment</Text>;
         }
 
         let chosenItem = this.state.chosenItem;

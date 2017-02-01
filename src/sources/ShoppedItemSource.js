@@ -21,7 +21,6 @@ let ShoppedItemSource = {
         });
     },
 
-
     create: (item, userId) => {
         return new Promise(resolve => {
             fetch(apiUrl, {

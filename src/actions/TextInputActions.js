@@ -19,6 +19,10 @@ class TextInputActions {
     resetTextInput(field) {
         return field;
     }
+
+    resetAllFields() {
+        return {};
+    }
 }
 
 export default AltInstance.createActions(TextInputActions);

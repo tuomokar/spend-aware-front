@@ -4,7 +4,7 @@ import config from 'config';
 let apiUrl = `${config.baseApiUrl}authenticate`;
 
 /**
- * Handles requests for web tokens.
+ * Handles requests for web tokens from /api/authenticate.
  */
 let TokenSource = {
 

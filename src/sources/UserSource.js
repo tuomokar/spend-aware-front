@@ -2,6 +2,8 @@ import 'whatwg-fetch';
 import config from 'config';
 
 let apiUrl = `${config.baseApiUrl}users`;
+
+
 /*
  * API for /users
  */
@@ -30,6 +32,28 @@ let UserSource = {
                 }).catch(ex => {
                     throw `parsing failed ${ex}`;
                 })
+        });
+    },
+
+    register: (userInfo) => {
+        return new Promise(resolve => {
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: userInfo.username,
+                    password: userInfo.password
+                })
+            })
+            .then(response => {
+                return response.json();
+            })
+            .then(resJson => {
+                resolve(resJson);
+            })
+            .catch(ex => {
+                throw `parsing failed ${ex}`;
+            })
         });
     }
 

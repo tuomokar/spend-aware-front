@@ -5,7 +5,7 @@ import Styles from 'constants/Styles';
 import TextField from 'components/atoms/TextField';
 import TextInputActions from 'actions/TextInputActions';
 import TextInputStore from 'stores/TextInputStore';
-import TokenActions from 'actions/TokenActions';
+import UserActions from 'actions/UserActions';
 
 /**
  * Handles logging in.
@@ -15,7 +15,7 @@ export default class LoginForm extends React.Component {
     _loginAction() {
         let inputs = TextInputStore.getState().textInputs;
 
-        TokenActions.attemptToAuthenticate({
+        UserActions.attemptToAuthenticate({
             username: inputs.username,
             password: inputs.password
         });

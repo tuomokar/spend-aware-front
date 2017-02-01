@@ -1,6 +1,5 @@
 import React from 'react'
 
-import Empty from 'components/atoms/Empty';
 import Button from 'components/atoms/Button';
 import Dialog from 'components/molecules/Dialog';
 import DialogActions from 'actions/DialogActions';
@@ -22,6 +21,7 @@ export default class ItemsPage extends React.Component {
     constructor() {
         super();
         this.state = ShoppedItemStore.getState();
+        this.mounted = false;
     }
 
     componentDidMount() {
@@ -31,6 +31,7 @@ export default class ItemsPage extends React.Component {
 
         this._fetchItemsOfUser();
         DialogActions.setDialogState('itemCreation', false);
+        this.mounted = true;
     }
 
     _fetchItemsOfUser() {
@@ -42,9 +43,13 @@ export default class ItemsPage extends React.Component {
         ShoppedItemStore.unlisten(this._onChange.bind(this));
         TextInputStore.unlisten(this._onChange.bind(this));
         DialogStateStore.unlisten(this._onChange.bind(this));
+        this.mounted = false;
     }
 
     _onChange(state) {
+        if (this.mounted === false) {
+            return;
+        }
         this.setState(state);
     }
 
@@ -112,9 +117,6 @@ export default class ItemsPage extends React.Component {
 
     render() {
         let items = this.state.shoppedItems;
-        if (this._noItems(items)) {
-            return <Empty />;
-        }
 
         return (
             <div style={ this._styles() }>

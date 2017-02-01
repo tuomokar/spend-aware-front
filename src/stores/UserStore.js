@@ -1,6 +1,6 @@
 import AltInstance from '../alt';
 
-import TokenActions from 'actions/TokenActions';
+import UserActions from 'actions/UserActions';
 
 /**
  * Holds the current user's info or error info on failed login
@@ -12,9 +12,10 @@ class UserStore {
         this.userInfo = {};
         this.error = {};
         this.bindListeners({
-            setUserInfo: TokenActions.AUTHENTICATION_SUCCEEDED,
-            setErrorMessage: TokenActions.AUTHENTICATION_FAILED,
-            loseUserInfo: TokenActions.LOGOUT
+            setUserInfo: UserActions.AUTHENTICATION_SUCCEEDED,
+            setLoginError: UserActions.AUTHENTICATION_FAILED,
+            setRegistrationError: UserActions.REGISTRATION_FAILED,
+            loseUserInfo: UserActions.LOGOUT
         });
     }
 
@@ -22,7 +23,11 @@ class UserStore {
         this.userInfo = userInfo;
     }
 
-    setErrorMessage(error = {}) {
+    setRegistrationError(error = {}) {
+        this.error = error;
+    }
+
+    setLoginError(error = {}) {
         this.error = error;
     }
 

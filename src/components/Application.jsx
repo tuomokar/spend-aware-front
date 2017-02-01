@@ -28,25 +28,8 @@ export default class Application extends React.Component {
         this.setState(state);
     }
 
-    _userRegistering() {
-        // TODO create a page for registering
-    }
-
     _userLoggedIn(userInfo) {
-        if (!userInfo || !userInfo.username) {
-            return false;
-        }
-        return true;
-    }
-
-    _renderLoginPage() {
-        return (
-            <div style={ this._styles() }>
-                <Page
-                    page='login'
-                    userStoreInfo={ this.state } />
-            </div>
-        );
+        return userInfo && userInfo.username;
     }
 
     _styles() {
@@ -59,19 +42,23 @@ export default class Application extends React.Component {
         };
     }
 
-    render() {
-        let userInfo = this.state.userInfo;
+    _renderPageWithoutHeader() {
+        return (
+            <div style={ this._styles() }>
+                <Page />
+            </div>
+        );
+    }
 
-        if (this._userLoggedIn(userInfo) === false) {
-            return this._renderLoginPage();
+    render() {
+        if (!this._userLoggedIn(this.state.userInfo)) {
+            return this._renderPageWithoutHeader();
         }
 
         return (
             <div style={ this._styles() }>
                 <Header />
-                <Page
-                    page='items'
-                    userStoreInfo={ this.state }/>
+                <Page />
             </div>
         );
     }
