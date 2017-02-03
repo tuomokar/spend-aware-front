@@ -21,7 +21,6 @@ export default class ItemsPage extends React.Component {
     constructor() {
         super();
         this.state = ShoppedItemStore.getState();
-        this.mounted = false;
     }
 
     componentDidMount() {
