@@ -96,7 +96,7 @@ export default class ItemRow extends React.Component {
                 <div className={ css(this._styles().itemNameContainer) }>
                     <div style={{ display: 'flex' }}>
                         { this._renderRowToggleIcon(isOpen) }
-                        <Item>{ this.props.children }</Item>
+                        <Item identification={ this.props.identification }>{ this.props.children }</Item>
                     </div>
                     { expandedInfo }
                 </div>
@@ -109,6 +109,7 @@ ItemRow.propTypes = {
     children: React.PropTypes.shape({
         name: React.PropTypes.string.isRequired
     }).isRequired,
+    identification: React.PropTypes.string,
     isOpen: React.PropTypes.bool
 }
 

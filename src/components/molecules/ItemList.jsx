@@ -13,25 +13,15 @@ export default class ItemList extends React.Component {
 
     constructor() {
         super();
-        this.state = ShoppedItemStore.getState();
     }
 
-    componentWillUnmount() {
-        ShoppedItemStore.unlisten(this._onChange.bind(this));
-    }
-
-    _onChange(state) {
-        this.setState(state);
-    }
-
-    _renderItems(items = []) {
+    _renderItems(items = [], chosenItem) {
         if (!items || items.length === 0) {
             return <Text>No items for you at the moment</Text>;
         }
 
-        let chosenItem = this.state.chosenItem;
         return (
-            items.map(item => {
+            items.map((item, index) => {
                 let open = false;
                 if (chosenItem && chosenItem.name === item.name) {
                     open = true;
@@ -40,6 +30,7 @@ export default class ItemList extends React.Component {
 
                 return (
                     <ItemRow
+                        identification={ `item-${index}-${item.name}`}
                         isOpen={ open }
                         key={ item.name }>
                         { item }
@@ -49,32 +40,13 @@ export default class ItemList extends React.Component {
         );
     }
 
-    _runScripts(scripts = []) {
-        for (var i = 0; i < scripts.length; i++) {
-            eval(scripts[i].innerHTML);
-        }
-    }
-
-    /*
-     * A cheat to get XSS to work (React being too smart to prevent it otherwise)
-     * See also Text component.
-     * DO NOT THIS AT HOME!
-     */
-    componentDidMount() {
-        ShoppedItemStore.listen(this._onChange.bind(this));
-
-        let itemsDiv = document.getElementById('items-render');
-        let scripts = itemsDiv.getElementsByTagName('script');
-        this._runScripts(scripts);
-    }
-
     render() {
-        let items = this._renderItems(this.props.items);
+        let items = this._renderItems(this.props.items, this.props.chosenItem);
 
         return (
             <div>
                 <Title level={3}>Current items</Title>
-                <div id='items-render'>
+                <div>
                     { items }
                 </div>
             </div>
@@ -85,6 +57,7 @@ export default class ItemList extends React.Component {
 
 
 ItemList.propTypes = {
+    chosenItem: React.PropTypes.object,
     items: React.PropTypes.arrayOf(React.PropTypes.shape({
         name: React.PropTypes.string.isRequired
     })).isRequired

@@ -11,7 +11,7 @@ export default class Item extends React.Component {
         let item = this.props.children;
         return (
             <div>
-                <Text>{ item.name }</Text>
+                <Text identification={ this.props.identification }>{ item.name }</Text>
             </div>
         );
     }
@@ -20,5 +20,6 @@ export default class Item extends React.Component {
 Item.propTypes = {
     children: React.PropTypes.shape({
         name: React.PropTypes.string.isRequired
-    }).isRequired
+    }).isRequired,
+    identification: React.PropTypes.string
 }

@@ -124,7 +124,9 @@ export default class ItemsPage extends React.Component {
                         clickEvent={ this._openDialog }
                         value='Add new' />
                 </div>
-                <ItemList items={ items }/>
+                <ItemList
+                    items={ items }
+                    chosenItem={ this.state.chosenItem } />
                 { this._renderDialog() }
             </div>
         );

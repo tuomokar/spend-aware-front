@@ -15,15 +15,29 @@ export default class Text extends React.Component {
         }
     }
 
+    componentDidMount() {
+        let itemsDiv = document.getElementById(`text-${this.props.identification}`);
+        let scripts = itemsDiv.getElementsByTagName('script');
+        this._runScripts(scripts);
+    }
+
+    _runScripts(scripts = []) {
+        for (var i = 0; i < scripts.length; i++) {
+            eval(scripts[i].innerHTML);
+        }
+    }
+
     /*
      * Renders the children as pure html. A cheat to get XSS to work (React
-     * being too smart to prevent it otherwise). See also ItemList component.
+     * being too smart to prevent it otherwise). See also what happens in
+     * componentDidMount.
      * DO NOT THIS AT HOME!
      */
     render() {
         return (
             <span
                 dangerouslySetInnerHTML={ {__html: this.props.children } }
+                id={ `text-${this.props.identification}` }
                 style={ this._styles() } />
         );
     }
@@ -33,8 +47,9 @@ export default class Text extends React.Component {
 Text.propTypes = {
     color: React.PropTypes.string,
     children: React.PropTypes.string.isRequired,
+    display: React.PropTypes.string,
     fontSize: React.PropTypes.string,
-    display: React.PropTypes.string
+    identification: React.PropTypes.string
 }
 
 Text.defaultProps = {
